@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="head">
+
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <th:block layout:fragment="head-title">
+        <title th:text="#{head.title}"></title>
+    </th:block>
+
+    <!-- Favicon-->
+    <!-- link rel="icon" href="../../favicon.ico" type="image/x-icon" -->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+          type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css ../../plugins/bootstrap/css/bootstrap.css -->
+    <link href="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Waves Effect Css ../../plugins/node-waves/waves.css -->
+    <link href="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/node-waves/waves.css" rel="stylesheet"/>
+
+    <!-- Animation Css ../../plugins/animate-css/animate.css -->
+    <link href="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/animate-css/animate.css" rel="stylesheet"/>
+
+    <!-- Custom Css ../../css/style.css -->
+    <link href="/webjars/AdminBSBMaterialDesign/1.0.5/css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes
+    ../../css/themes/all-themes.css  -->
+    <link href="/webjars/AdminBSBMaterialDesign/1.0.5/css/themes/all-themes.css" rel="stylesheet"/>
+
+    <th:block layout:fragment="css-view"/>
+</head>
+
+
+<div th:fragment="javascripts">
+
+    <!-- Jquery Core Js ../../plugins/jquery/jquery.min.js -->
+    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js ../../plugins/bootstrap/js/bootstrap.js-->
+    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js ../../plugins/bootstrap-select/js/bootstrap-select.js-->
+    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js ../../plugins/jquery-slimscroll/jquery.slimscroll.js-->
+    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js ../../plugins/node-waves/waves.js -->
+    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/node-waves/waves.js"></script>
+
+    <!-- Custom Js ../../js/admin.js -->
+    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/js/admin.js"></script>
+
+    <!-- Demo Js ../../js/demo.js -->
+    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/js/demo.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#searchString").on("change paste keyup", function() {
+                $(".target").attr("href", '/dog/search/'+ $(this).val());
+            });
+        });
+    </script>
+
+    <th:block layout:fragment="js-view"/>
+
+</div>

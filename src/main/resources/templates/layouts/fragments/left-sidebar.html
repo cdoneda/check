@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="menu">
+    <div class="menu">
+        <ul class="list">
+
+            <li class="header" th:text="#{menu.menuItems}">MENU</li>
+            <li class="active">
+                <a th:href="@{/}">
+                    <i class="material-icons">home</i>
+                    <span th:text="#{menu.home}">Home</span>
+                </a>
+            </li>
+            <li class="header" th:text="#{menu.administration}">ADM</li>
+
+            <li>
+                <a th:href="@{/dog/add}" id="btn-add-dog">
+                    <i class="material-icons">add</i>
+                    <span th:text="#{alvorada}">Adicionar cão</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div th:fragment="user-info">
+    <div class="user-info">
+        <div class="info-container">
+            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${#authentication.principal.user.name}">John Doe</div>
+            <div class="email" th:text="${#authentication.principal.user.email}">john.doe@example.com</div>
+            <div class="btn-group user-helper-dropdown">
+                <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                <ul class="dropdown-menu pull-right">
+                    <li><a th:href="@{/user/profile}" href="javascript:void(0);"><i class="material-icons">person</i><span th:text="#{user.profile}"/>
+                    </a></li>
+                    <li role="seperator" class="divider"></li>
+                    <li><a  th:href="@{/logout}"><i class="material-icons">input</i><span th:text="#{user.signOut}"/></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="footer">
+
+    <div class="legal">
+        <div class="copyright">
+            <span th:text="#{footer.copyrights}"/>
+            <a href="http://canoas.ifrs.edu.br"><span th:text="#{ifrs}"/></a>.
+        </div>
+        <div class="version">
+            <b th:text="#{footer.version}">Version: </b>
+            <span th:text="#{footer.version.number}"/>
+        </div>
+    </div>
+
+
+</div>

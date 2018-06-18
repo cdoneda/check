@@ -1,0 +1,44 @@
+<html layout:decorate="~{/layouts/main}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block layout:fragment="head-title">
+    <title th:text="#{home}"/>
+</th:block>
+
+<!-- CONTENT HEADER -->
+<div layout:fragment="content-header">
+
+    <!-- PAGE TITLE -->
+    <div class="block-header">
+        <!--h1>
+            <span th:text="#{index.header}"/>
+            <small><span th:text="#{index.title}"/></small>
+        </h1>
+        <!-- BREADCRUMB -->
+        <ol class="breadcrumb breadcrumb-bg-blue-grey align-right">
+            <li class="active"><i class="material-icons">home</i> <span th:text="#{home}"/></li>
+        </ol>
+    </div>
+
+
+</div>
+
+
+<div layout:fragment="content">
+    <!-- Main content -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2 th:text="#{alvorada}">
+                        LISTA DE CÃES DO IFRS - <i>CAMPUS</i> CANOAS
+                    </h2>
+                </div>
+
+                <div class="body">
+                    Texto
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

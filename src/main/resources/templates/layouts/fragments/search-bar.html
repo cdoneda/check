@@ -1,0 +1,20 @@
+<div th:fragment="search">
+    <!--form id="form_search" method="post"  th:action="@{/dog/search}"-->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING..." name="searchString" id="searchString"
+               th:placeholder="#{field.search.placeholder}">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+        <a href="/dog/search" class="target">
+            <button type="button" name="btns" id="btns" class="btn btn-primary btn-lg m-l-15 waves-effect"
+                    style="position: absolute; top: 20px; right: 80px;">PESQUISAR
+            </button>
+        </a>
+    </div>
+
+</div>
+
