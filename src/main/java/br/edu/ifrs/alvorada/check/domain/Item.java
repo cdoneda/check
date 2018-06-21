@@ -22,10 +22,10 @@ public class Item {
     @Size(min = 2, max = 100)
     private String description;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Type type;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Status status;
 
 }

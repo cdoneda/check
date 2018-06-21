@@ -1,60 +1,63 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-<head th:insert="/layouts/fragments/scripts :: head"/>
+<head th:insert="/layouts/fragments/scripts :: head" />
 
-<body class="theme-deep-orange">
-<!-- Page Loader -->
-<!--div th:insert="/layouts/fragments/page-loader :: loader"/-->
-<!-- #END# Page Loader -->
+<body class="hold-transition skin-blue sidebar-mini">
+	<!-- Site wrapper -->
+	<div class="wrapper">
 
-<!-- Overlay For Sidebars -->
-<div class="overlay"></div>
-<!-- #END# Overlay For Sidebars -->
-<!-- Search Bar -->
-<div th:insert="/layouts/fragments/search-bar :: search"></div>
-<!-- #END# Search Bar -->
-<!-- Top Bar -->
-<div th:insert="/layouts/fragments/top-bar :: nav-main"></div>
+		<header class="main-header">
+			<!-- Logo -->
+			<a href="../../index2.html" th:href="@{/}" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini"><b th:text="#{main.appTitle.mini}"></b>&nbsp;<span
+					th:text="#{main.if.mini}"></span></span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><b th:text="#{main.appTitle.large}"></b>&nbsp;<span
+					th:text="#{main.if.large}"></span></span>
+			</a>
+			<!-- Header Navbar: style can be found in header.less -->
 
-<!-- #Top Bar -->
-<section>
-    <!-- Left Sidebar -->
-    <aside id="leftsidebar" class="sidebar">
-        <!-- User Info -->
-        <div th:insert="/layouts/fragments/left-sidebar :: user-info"/>
-        <!-- #User Info -->
-        <!-- Menu -->
-        <div class="menu">
-            <div th:insert="/layouts/fragments/left-sidebar :: menu"/>
-        </div>
-        <!-- #Menu -->
-        <!-- Footer -->
-        <div th:insert="/layouts/fragments/left-sidebar :: footer"/>
-        <!-- #Footer -->
-    </aside>
-    <!-- #END# Left Sidebar -->
-    <!-- Right Sidebar -->
-    <div th:insert="/layouts/fragments/right-sidebar :: right-sidebar"/>
-    <!-- #END# Right Sidebar -->
-</section>
 
-<section class="content">
-    <div class="container-fluid">
-        <div layout:fragment="content-header"/>
-        <div class="alert alert-success" th:if="${message}">
-            <span id="success-message" th:text="${message}"></span>
-        </div>
-        <div layout:fragment="content"/>
-    </div>
-</section>
+			<div th:insert="/layouts/fragments/static-top :: items"/>
 
-<!-- JS -->
-<div th:insert="/layouts/fragments/scripts :: javascripts"/>
+		</header>
+
+		<!-- =============================================== -->
+
+		<aside class="main-sidebar" th:insert="/layouts/fragments/menu :: items"></aside>
+
+		<!-- =============================================== -->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+
+            <div layout:fragment="content-header"/>
+
+
+			<section class="content-header" th:if="${message}">
+				<div class="callout callout-success lead">
+	                <p id="success-message" th:text="${message}"></p>
+				</div>
+			</section>
+
+            <div layout:fragment="content"/>
+
+		</div>
+		<!-- /.content-wrapper -->
+		<div th:insert="/layouts/fragments/footer :: main"/>
+
+		<!-- Control Sidebar -->
+		<!--aside class="control-sidebar control-sidebar-dark" th:insert="/layouts/fragments/control-sidebar :: items" /-->
+
+		<!-- /.control-sidebar -->
+		<!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+		<!--div class="control-sidebar-bg"/-->
+	</div>
+	<!-- ./wrapper -->
+
+
+	<div th:insert="/layouts/fragments/scripts :: javascripts" />
 
 
 </body>
-
 </html>

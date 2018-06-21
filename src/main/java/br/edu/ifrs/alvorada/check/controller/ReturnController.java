@@ -9,17 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @AllArgsConstructor
-public class HomeController {
-
-    @GetMapping("/")
-    public ModelAndView home() {
-        ModelAndView mav = new ModelAndView("redirect:/home/");
-        return mav;
-    }
+public class ReturnController {
 
 
-    // TODO cassiano private landing page
-    @GetMapping("/home")
+    @GetMapping("/return")
     public ModelAndView home(@AuthenticationPrincipal UserImpl activeUser) {
         ModelAndView mav = new ModelAndView("/index");
         return mav;

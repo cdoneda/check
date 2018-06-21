@@ -1,64 +1,106 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-
-      layout:decorate="~{/layouts/main}">
+<html layout:decorate="~{/layouts/main}">
 
 	<head>
 		<title th:text="#{user.profile}" />
 	</head>
-
+	
 	<!-- CONTENT HEADER -->
 	<div layout:fragment="content-header">
-			<div class="block-header">
-			<!--h1>
-                <span th:text="#{index.header}"/>
-                <small><span th:text="#{index.title}"/></small>
-            </h1>
-            <!-- BREADCRUMB -->
-			<ol class="breadcrumb breadcrumb-bg-blue-grey align-right">
-				<li><a th:href="@{/}">
-					<i class="material-icons">home</i> <span th:text="#{home}"/></a>
-				</li>
-				<li class="active"><i class="material-icons">info</i><span th:text="#{user.profile}" /></li>
+		<section class="content-header">
+			<!-- PAGE TITLE -->
+			<h1>
+				<span th:text="#{user.profile}" />
+			</h1>
+			<!-- BREADCRUMB -->
+			<ol class="breadcrumb">
+				<li><a href="#"> <i class="fa fa-dashboard"></i> <span
+						th:text="#{breadcrumb}" />
+				</a></li>
+				<li><a href="#"><span th:text="#{user.profile}" /></a></li>
 			</ol>
-		</div>
+		</section>
 	</div>
-
-
+	
+	
 	<!-- CONTENT -->
 	<div layout:fragment="content">
 		<!-- Main content -->
-		<section>
+		<section class="content">
 			<div class="row">
-
-				<div class="col-md-12">
-					<div class="card">
-						<div class="body">
-							<form th:object="${user}" th:action="@{/user/save}" method="post">
+				<div class="col-md-3">
+					<!-- Profile Image -->
+					<div class="box box-primary">
+						<div class="box-body box-profile">
+							<img class="profile-user-img img-responsive img-circle"
+								src="/photos/no_image_available.png" alt="User profile picture">
+	
+							<h3 class="profile-username text-center" th:text="${#authentication.principal.user.name}">Nina Mcintire</h3>
+	
+							<p class="text-muted text-center">Software Engineer</p>
+	
+							<ul class="list-group list-group-unbordered">
+								<li class="list-group-item"><b>Followers</b> <a
+									class="pull-right">1,322</a></li>
+								<li class="list-group-item"><b>Following</b> <a
+									class="pull-right">543</a></li>
+								<li class="list-group-item"><b>Friends</b> <a
+									class="pull-right">13,287</a></li>
+							</ul>
+	
+							<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
+				</div>
+				<!-- /.col -->
+				<div class="col-md-9">
+					<div class="box box-primary">
+						<div class="box-body box-profile">
+							<form class="form-horizontal" th:object="${user}" th:action="@{/user/save}" method="post">
+							
 								<input type="hidden" id="id" th:field="*{id}">
-								<div class="form-group form-float">
-									<div class="form-line" th:classappend="${#fields.hasErrors('name')}? 'error'">
-										<input type="text" class="form-control" th:field="*{name}" id="inputName" name="inputName" required>
-										<label class="form-label">Name</label>
+							
+								<div class="form-group">
+									<label for="inputName" class="col-sm-2 control-label">Name</label>
+	
+									<div class="col-sm-10" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+										<input type="text" class="form-control" id="inputName" th:field="*{name}"
+											placeholder="Name">
+										<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                                    th:class="help-block" />
 									</div>
-									<label class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-										   style="display: block;">Name Error</label>
 								</div>
-								<div class="form-group form-float">
-									<div class="form-line" th:classappend="${#fields.hasErrors('email')}? 'error'">
-										<input type="text" class="form-control" th:field="*{email}" id="inputEmail" name="inputEmail" required>
-										<label class="form-label">Email</label>
+								<div class="form-group">
+									<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+	
+									<div class="col-sm-10" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+										<input type="email" class="form-control" id="inputEmail" th:field="*{email}"
+											placeholder="Email">
+										<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                                    th:class="help-block" />
 									</div>
-									<label class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-										   style="display: block;">Email Error</label>
 								</div>
-								<button class="btn btn-primary waves-effect" type="submit" th:text="#{button.save}">SUBMIT</button>
+
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<div class="checkbox">
+											<label> <input type="checkbox" checked="true"> I agree to the
+												<a href="#">terms and conditions</a>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-danger">Submit</button>
+									</div>
+								</div>
 							</form>
 						</div>
 						<!-- /.box-body -->
 					</div>
-
+	
 				</div>
 				<!-- /.nav-tabs-custom -->
 			</div>

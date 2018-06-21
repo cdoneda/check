@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div th:fragment="main" id="items-section" th:if="${user.id}">
+
+	<table id="table-list" class="table table-bordered table-striped">
+		<thead>
+		<tr>
+			<th>Patrimônio</th>
+			<th>Nome</th>
+		</tr>
+		</thead>
+		<tbody th:remove="all-but-first">
+		<tr  data-th-each="item : *{loans}">
+			<td data-th-text="${item.id}">id</td>
+			<td data-th-text="${item.item.name}">nome</td>
+		</tr>
+
+		</tbody>
+	</table>
+</div>
+</html>

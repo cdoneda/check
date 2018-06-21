@@ -48,6 +48,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	         .logout()
 	             .permitAll();
 		http.csrf().disable();
-		http.exceptionHandling().authenticationEntryPoint(new AjaxAwareAuthenticationEntryPoint("/login"));
 	}
 }

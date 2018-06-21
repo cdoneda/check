@@ -1,73 +1,44 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
 <head th:fragment="head">
-
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
     <th:block layout:fragment="head-title">
         <title th:text="#{head.title}"></title>
     </th:block>
+    <meta name="theme-color" content="#ffffff"/>
 
-    <!-- Favicon-->
-    <!-- link rel="icon" href="../../favicon.ico" type="image/x-icon" -->
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
-          type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7/dist/css/bootstrap.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="/webjars/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" type="text/css" href="/webjars/ionicons/2.0.1/css/ionicons.min.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" type="text/css" href="/webjars/adminlte/2.3.11/dist/css/AdminLTE.min.css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" type="text/css" href="/webjars/adminlte/2.3.11/dist/css/skins/_all-skins.min.css" />
 
-    <!-- Bootstrap Core Css ../../plugins/bootstrap/css/bootstrap.css -->
-    <link href="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Waves Effect Css ../../plugins/node-waves/waves.css -->
-    <link href="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/node-waves/waves.css" rel="stylesheet"/>
-
-    <!-- Animation Css ../../plugins/animate-css/animate.css -->
-    <link href="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/animate-css/animate.css" rel="stylesheet"/>
-
-    <!-- Custom Css ../../css/style.css -->
-    <link href="/webjars/AdminBSBMaterialDesign/1.0.5/css/style.css" rel="stylesheet">
-
-    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes
-    ../../css/themes/all-themes.css  -->
-    <link href="/webjars/AdminBSBMaterialDesign/1.0.5/css/themes/all-themes.css" rel="stylesheet"/>
 
     <th:block layout:fragment="css-view"/>
 </head>
 
 
 <div th:fragment="javascripts">
-
-    <!-- Jquery Core Js ../../plugins/jquery/jquery.min.js -->
-    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core Js ../../plugins/bootstrap/js/bootstrap.js-->
-    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/bootstrap/js/bootstrap.js"></script>
-
-    <!-- Select Plugin Js ../../plugins/bootstrap-select/js/bootstrap-select.js-->
-    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/bootstrap-select/js/bootstrap-select.js"></script>
-
-    <!-- Slimscroll Plugin Js ../../plugins/jquery-slimscroll/jquery.slimscroll.js-->
-    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-
-    <!-- Waves Effect Plugin Js ../../plugins/node-waves/waves.js -->
-    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/plugins/node-waves/waves.js"></script>
-
-    <!-- Custom Js ../../js/admin.js -->
-    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/js/admin.js"></script>
-
-    <!-- Demo Js ../../js/demo.js -->
-    <script src="/webjars/AdminBSBMaterialDesign/1.0.5/js/demo.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $("#searchString").on("change paste keyup", function() {
-                $(".target").attr("href", '/dog/search/'+ $(this).val());
-            });
-        });
-    </script>
+    <!-- jQuery 2.2.3 -->
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="/webjars/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="/webjars/fastclick/1.0.6/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/webjars/adminlte/2.3.11/dist/js/app.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/webjars/adminlte/2.3.11/dist/js/demo.js"></script>
 
     <th:block layout:fragment="js-view"/>
 

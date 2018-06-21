@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- form start-->
+<form role="form" name="f" th:action="@{/loan/save}"
+      th:object="${item}" method="post" id="itemForm">
+    <div class="box-body">
+        <input type="hidden" id="id" th:field="*{id}"/>
+        <div class="form-group">
+            <div th:classappend="${#fields.hasErrors('item.id')}? 'has-error'">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
+                    <input id="item" type="text" class="form-control" th:field="*{item.id}" />
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-info btn-flat"><i class="fa fa-plus"></i></button>
+                    </span>
+                </div>
+                <span th:if="${#fields.hasErrors('item.id')}" th:errors="*{item.id}"
+                      th:class="help-block"/>
+            </div>
+        </div>
+    </div>
+    <!-- /.box-body -->
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-success pull-right">Finalizar</button>
+    </div>
+</form>
