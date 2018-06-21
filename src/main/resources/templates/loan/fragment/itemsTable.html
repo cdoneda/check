@@ -8,12 +8,14 @@
 		<tr>
 			<th>Patrimônio</th>
 			<th>Nome</th>
+			<th>Data/Hora Retirada</th>
 		</tr>
 		</thead>
 		<tbody th:remove="all-but-first">
-		<tr  data-th-each="item : *{loans}">
-			<td data-th-text="${item.id}">id</td>
-			<td data-th-text="${item.item.name}">nome</td>
+		<tr  th:each="item : *{loans}">
+			<td th:text="${item.item.id}">id</td>
+			<td th:text="${item.item.name}">nome</td>
+			<td th:text="${#temporals.format(item.dateTimeLoan, 'dd/MM/yyyy HH:mm')}">date</td>
 		</tr>
 
 		</tbody>

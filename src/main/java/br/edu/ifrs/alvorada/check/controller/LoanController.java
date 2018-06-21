@@ -2,7 +2,9 @@ package br.edu.ifrs.alvorada.check.controller;
 
 import br.edu.ifrs.alvorada.check.config.Messages;
 import br.edu.ifrs.alvorada.check.config.auth.UserImpl;
-import br.edu.ifrs.alvorada.check.domain.*;
+import br.edu.ifrs.alvorada.check.domain.Item;
+import br.edu.ifrs.alvorada.check.domain.Search;
+import br.edu.ifrs.alvorada.check.domain.StatusLoan;
 import br.edu.ifrs.alvorada.check.service.ItemService;
 import br.edu.ifrs.alvorada.check.service.LoanService;
 import lombok.AllArgsConstructor;
@@ -11,13 +13,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 
 @Secured("ROLE_USER")
 @Controller

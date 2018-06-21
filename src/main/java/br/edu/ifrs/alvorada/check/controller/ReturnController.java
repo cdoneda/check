@@ -14,7 +14,7 @@ public class ReturnController {
 
     @GetMapping("/return")
     public ModelAndView home(@AuthenticationPrincipal UserImpl activeUser) {
-        ModelAndView mav = new ModelAndView("/index");
+        ModelAndView mav = new ModelAndView("/return/return");
         return mav;
     }
 }
