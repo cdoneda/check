@@ -3,6 +3,7 @@ package br.edu.ifrs.alvorada.check.controller;
 import br.edu.ifrs.alvorada.check.config.Messages;
 import br.edu.ifrs.alvorada.check.config.auth.UserImpl;
 import br.edu.ifrs.alvorada.check.domain.Item;
+import br.edu.ifrs.alvorada.check.domain.Loan;
 import br.edu.ifrs.alvorada.check.domain.Search;
 import br.edu.ifrs.alvorada.check.domain.StatusLoan;
 import br.edu.ifrs.alvorada.check.service.ItemService;
@@ -31,14 +32,12 @@ public class LoanController {
     private final ItemService itemService;
     private final Messages messages;
 
-    // TODO cassiano private landing page
+    // TODO
     @GetMapping(value = {"", "/"})
     public ModelAndView form(@AuthenticationPrincipal UserImpl activeUser) {
         ModelAndView mav = new ModelAndView("/loan/loan");
-        System.out.println(loanService.getLoans(activeUser.getUser()));
         mav.addObject("search", new Search());
         mav.addObject("loans", loanService.getLoans(activeUser.getUser()));
-        mav.addObject("user", activeUser.getUser());
         return mav;
     }
 
@@ -47,24 +46,14 @@ public class LoanController {
                                            @Valid Search search,
                                            BindingResult bindingResult) {
         ModelAndView mav = new ModelAndView("/loan/loan");
-
-        Item newItem = itemService.getOneById(search.getCriteria());
-
-        if (newItem != null) {
+        Item newItem = itemService.getOneById(search.getCriteria(), bindingResult, activeUser.getUser());
+        newItem = loanService.checkLoaned(newItem, bindingResult, activeUser.getUser());
+        if (!bindingResult.hasErrors()) {
             loanService.save(activeUser.getUser(), search.getCriteria(), StatusLoan.OUTPUT);
-        }
-        if (newItem == null) {
-            bindingResult.addError(new FieldError("search","criteria", messages.get("field.not.founded")));
+            mav.addObject("message", messages.get("field.saved"));
         }
         mav.addObject("item", newItem);
         mav.addObject("loans", loanService.getLoans(activeUser.getUser()));
-        mav.addObject("user", activeUser.getUser());
-
-        if (bindingResult.hasErrors())
-            return mav;
-
-        mav.addObject("message",  messages.get("field.saved"));
-
         return mav;
     }
 

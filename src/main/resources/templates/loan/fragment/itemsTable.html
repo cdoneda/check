@@ -1,7 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
-<div th:fragment="main" id="items-section" th:if="${user.id}">
+<div class="box-header with-border">
+	<h3 class="box-title">Lista de equipamentos emprestados</h3>
+</div>
+<div th:fragment="main" id="items-section" th:hidden="${#lists.isEmpty(loans)}">
 
 	<table id="table-list" class="table table-bordered table-striped">
 		<thead>
@@ -12,7 +14,7 @@
 		</tr>
 		</thead>
 		<tbody th:remove="all-but-first">
-		<tr  th:each="item : *{loans}">
+		<tr  th:each="item : ${loans}">
 			<td th:text="${item.item.id}">id</td>
 			<td th:text="${item.item.name}">nome</td>
 			<td th:text="${#temporals.format(item.dateTimeLoan, 'dd/MM/yyyy HH:mm')}">date</td>
