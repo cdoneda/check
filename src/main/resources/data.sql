@@ -11,6 +11,7 @@ insert into role(id, role) values
 -- USER_ROLES
 insert into user_roles (user_id, roles_id) values
 (1001, 1),
+(1001, 2),
 (1002, 1);
 
 insert into item (id, description, name, status, type) values

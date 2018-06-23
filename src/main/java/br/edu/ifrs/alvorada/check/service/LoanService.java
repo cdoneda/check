@@ -63,4 +63,24 @@ public class LoanService {
         }
         return item;
     }
+
+
+    //Counters
+    public List<?> findTotalLoanedCountersByUser(User user) {
+        return loanRepository.findTotalLoanedCountersByUser(user.getId());
+    }
+
+    public List<?> findTotalLoansCountersByUser(User user) {
+        return loanRepository.findTotalLoansCountersByUser(user.getId());
+    }
+
+    public List<?> findTotalLoansCounters() {
+        return loanRepository.findTotalLoansCounters();
+    }
+
+    public List<?> findTotalLoanedCounters() {
+        return loanRepository.findTotalLoanedCounters();
+    }
+
+
 }

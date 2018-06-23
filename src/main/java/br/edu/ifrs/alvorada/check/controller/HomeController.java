@@ -1,6 +1,7 @@
 package br.edu.ifrs.alvorada.check.controller;
 
 import br.edu.ifrs.alvorada.check.config.auth.UserImpl;
+import br.edu.ifrs.alvorada.check.service.LoanService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 @AllArgsConstructor
 public class HomeController {
 
+
+    private LoanService loanService;
     @GetMapping("/")
     public ModelAndView home() {
         ModelAndView mav = new ModelAndView("redirect:/home/");
@@ -22,6 +25,10 @@ public class HomeController {
     @GetMapping("/home")
     public ModelAndView home(@AuthenticationPrincipal UserImpl activeUser) {
         ModelAndView mav = new ModelAndView("/index");
+        mav.addObject("loanedCountersByUser", loanService.findTotalLoanedCountersByUser(activeUser.getUser()));
+        mav.addObject("loansCountersByUser", loanService.findTotalLoansCountersByUser(activeUser.getUser()));
+        mav.addObject("totalLoanedCounters", loanService.findTotalLoanedCounters());
+        mav.addObject("totalLoansCounters", loanService.findTotalLoansCounters());
         return mav;
     }
 }
