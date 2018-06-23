@@ -1,48 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="items">
 
-	<nav class="navbar navbar-static-top">
-		<!-- Sidebar toggle button-->
-		<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
-			role="button"> <span class="sr-only">Toggle navigation</span> <span
-			class="icon-bar"></span> <span class="icon-bar"></span> <span
-			class="icon-bar"></span>
-		</a>
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas"
+           role="button"> <span class="sr-only">Toggle navigation</span> <span
+                class="icon-bar"></span> <span class="icon-bar"></span> <span
+                class="icon-bar"></span>
+        </a>
 
-		<div class="navbar-custom-menu">
-			<ul class="nav navbar-nav">
-				<li class="dropdown user user-menu"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown">
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-language"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header" th:text="#{language}">Language</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                <li>
+                                    <a  href="#" th:href="@{?lang=pt_BR}">
+                                        <i class="flag-icon flag-icon-br"></i>  <span
+                                            th:text="#{language.pt_BR}"> Portuguese</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" th:href="@{?lang=en_US}">
+                                        <i class="flag-icon flag-icon-us"></i>  <span
+                                            th:text="#{language.en_US}"> English</span></a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					 <span class="hidden-xs"
-						th:text="${#authentication.principal.user.name}" />
-				</a>
-					<ul class="dropdown-menu">
-						<!-- User image -->
-						<li class="user-header"><img
-							src="/photos/no_image_available.png" class="img-circle"
-							alt="User Image">
+                           th:text="${#authentication.principal.user.name}"/>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header"><img
+                                src="/photos/no_image_available.png" class="img-circle"
+                                alt="User Image">
 
-							<p>
+                            <p>
 								<span class="hidden-xs"
-									th:text="${#authentication.principal.user.name}" /> <small>Some
-									description here...</small>
-							</p></li>
-						<!-- Menu Footer-->
-						<li class="user-footer">
-							<div class="pull-left">
-								<a href="#" class="btn btn-default btn-flat"
-									th:href="@{/user/profile}">Profile</a>
-							</div>
-							<div class="pull-right">
-								<a href="#" th:href="@{/login?logout}"
-									class="btn btn-default btn-flat">Sign out</a>
-							</div>
-						</li>
-					</ul></li>
-				<!-- Control Sidebar Toggle Button -->
-				<!--li><a href="#" data-toggle="control-sidebar"><i
-						class="fa fa-gears"></i></a></li-->
-			</ul>
-		</div>
-	</nav>
+                                      th:text="${#authentication.principal.user.name}"/>
+                                <small>Some
+                                    description here...
+                                </small>
+                            </p>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="#" class="btn btn-default btn-flat"
+                                   th:href="@{/user/profile}">Profile</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="#" th:href="@{/login?logout}"
+                                   class="btn btn-default btn-flat">Sign out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Control Sidebar Toggle Button -->
+                <!--li><a href="#" data-toggle="control-sidebar"><i
+                        class="fa fa-gears"></i></a></li-->
+            </ul>
+        </div>
+    </nav>
 
 </div>

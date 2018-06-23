@@ -1,4 +1,6 @@
-
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head th:fragment="head">
     <th:block layout:fragment="head-title">
@@ -20,6 +22,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" type="text/css" href="/webjars/adminlte/2.3.11/dist/css/skins/_all-skins.min.css" />
 
+    <link rel="stylesheet" type="text/css" href="/webjars/flag-icon-css/3.0.0/css/flag-icon.min.css" />
 
 
     <th:block layout:fragment="css-view"/>
@@ -39,6 +42,8 @@
     <script src="/webjars/adminlte/2.3.11/dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/webjars/adminlte/2.3.11/dist/js/demo.js"></script>
+
+
 
     <th:block layout:fragment="js-view"/>
 
