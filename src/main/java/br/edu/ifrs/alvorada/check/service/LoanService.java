@@ -83,4 +83,8 @@ public class LoanService {
     }
 
 
+    public List<?> findLoansByDays(int days) {
+        return loanRepository.findLoansCountersByLastDay(days);
+    }
+
 }

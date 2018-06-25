@@ -34,14 +34,14 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-body">
-                <h4>Meus dados</h4>
+                <h4 th:text="#{my.statistics}">Meus dados</h4>
                 <div class="row">
                     <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
-                        <div class="small-box bg-yellow">
+                        <div class="small-box bg-red">
                             <div class="inner">
                                 <h3><span th:text="${loanedCountersByUser[0]}"></span></h3>
-                                <p>Empréstimos pendentes</p>
+                                <p th:text="#{outstanding.loans}">Empréstimos pendentes</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
@@ -52,11 +52,11 @@
                     <!-- ./col -->
                     <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
-                        <div class="small-box bg-green">
+                        <div class="small-box bg-blue">
                             <div class="inner">
                                 <h3><span th:text="${loansCountersByUser[0]}"></span></h3>
 
-                                <p>Total de empréstimo</p>
+                                <p th:text="#{total.loans}">Total de empréstimo</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -66,7 +66,7 @@
                     </div>
                     <!-- ./col -->
                 </div>
-                <h4>Estatísticas Gerais</h4>
+                <h4 sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{general.statistics}">Estatísticas Gerais</h4>
                 <div class="row" sec:authorize="hasRole('ROLE_ADMIN')">
                     <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
@@ -74,36 +74,80 @@
                             <div class="inner">
                                 <h3><span th:text="${totalLoanedCounters[0]}"></span></h3>
 
-                                <p>Items Emprestados</p>
+                                <p th:text="#{outstanding.loans}">Empréstimos pendentes</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="ion ion-bag"></i>
                             </div>
                         </div>
                     </div>
                     <!-- ./col -->
                     <div class="col-lg-3 col-xs-6">
                         <!-- small box -->
-                        <div class="small-box bg-green">
+                        <div class="small-box bg-blue">
                             <div class="inner">
                                 <h3><span th:text="${totalLoansCounters[0]}"></span></h3>
 
-                                <p>Unique Visitors</p>
+                                <p th:text="#{total.loans}">Total de empréstimos</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
+                                <i class="ion ion-stats-bars"></i>
                             </div>
 
                         </div>
                     </div>
                 </div>
                 <!-- ./col -->
+                <div class="row" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <div class="col-lg-3 col-xs-4">
+                        <!-- small box -->
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3><span th:text="${totalLoansToday[0]}"></span></h3>
+
+                                <p th:text="#{loans.today}">Hoje</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-xs-4">
+                        <!-- small box -->
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3><span th:text="${totalLoansLastSevenDays[0]}"></span></h3>
+
+                                <p th:text="#{loans.last.seven.days}">Últimos 7 dias</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-xs-4">
+                        <!-- small box -->
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3><span th:text="${totalLoansLastThirtyDays[0]}"></span></h3>
+
+                                <p th:text="#{loans.last.thirty.days}">Últimos 30 dias</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
             </div>
         </div>
         <!-- /.box-body -->
-        <div class="box-footer">
+        <!--div class="box-footer">
             Footer
-        </div>
+        </div-->
         <!-- /.box-footer-->
 
         <!-- /.box -->

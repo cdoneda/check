@@ -29,6 +29,9 @@ public class HomeController {
         mav.addObject("loansCountersByUser", loanService.findTotalLoansCountersByUser(activeUser.getUser()));
         mav.addObject("totalLoanedCounters", loanService.findTotalLoanedCounters());
         mav.addObject("totalLoansCounters", loanService.findTotalLoansCounters());
+        mav.addObject("totalLoansToday", loanService.findLoansByDays(0));
+        mav.addObject("totalLoansLastSevenDays", loanService.findLoansByDays(-7));
+        mav.addObject("totalLoansLastThirtyDays", loanService.findLoansByDays(-30));
         return mav;
     }
 }

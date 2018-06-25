@@ -28,11 +28,10 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
     @Query(value="SELECT  COUNT(id) FROM Loan WHERE date_time_return is null;",nativeQuery = true)
     List<Object[]> findTotalLoanedCounters();
 
-
     @Query(value="SELECT  COUNT(id) FROM Loan;",nativeQuery = true)
     List<Object[]> findTotalLoansCounters();
 
-    @Query(value="SELECT COUNT(id) FROM LOAN WHERE date_time_loan BETWEEN CURRENT_DATE() - (?1) AND CURRENT_DATE();",nativeQuery = true)
+    @Query(value="SELECT COUNT(id) FROM Loan WHERE date_Time_Loan  > DATEADD('DAY',(?1), CURRENT_DATE())",nativeQuery = true)
     List<Object[]> findLoansCountersByLastDay(int days);
 
 }

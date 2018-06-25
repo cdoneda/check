@@ -1,15 +1,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<div class="box-header with-border">
-	<h3 class="box-title">Lista de equipamentos emprestados</h3>
-</div>
-<div th:fragment="main" id="items-section" th:hidden="${#lists.isEmpty(loans)}">
 
+<div th:fragment="main" id="items-section" th:hidden="${#lists.isEmpty(loans)}">
+	<div class="box-header with-border">
+		<h3 class="box-title" th:text="#{my.loans.pending.items}">Meus empréstimos: Itens pendentes</h3>
+	</div>
 	<table id="table-list" class="table table-bordered table-striped">
 		<thead>
 		<tr>
-			<th>Patrimônio</th>
-			<th>Nome</th>
-			<th>Data/Hora Retirada</th>
+			<th th:text="#{patrimony}">Patrimônio</th>
+			<th th:text="#{name}">Nome</th>
+			<th th:text="#{date.hour.removal}">Data/Hora Retirada</th>
 		</tr>
 		</thead>
 		<tbody th:remove="all-but-first">
@@ -18,7 +18,6 @@
 			<td th:text="${item.item.name}">nome</td>
 			<td th:text="${#temporals.format(item.dateTimeLoan, 'dd/MM/yyyy HH:mm')}">date</td>
 		</tr>
-
 		</tbody>
 	</table>
 </div>
