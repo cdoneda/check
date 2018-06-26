@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.time.LocalDateTime;
 
 
@@ -28,4 +29,7 @@ public class Loan {
 
     @NotNull
     private StatusLoan statusLoan;
+
+    @OneToOne
+    private User userReturn;
 }

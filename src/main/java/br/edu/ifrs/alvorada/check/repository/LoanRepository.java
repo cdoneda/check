@@ -3,7 +3,6 @@ package br.edu.ifrs.alvorada.check.repository;
 import br.edu.ifrs.alvorada.check.domain.Loan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,5 +32,7 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
 
     @Query(value="SELECT COUNT(id) FROM Loan WHERE date_Time_Loan  > DATEADD('DAY',(?1), CURRENT_DATE())",nativeQuery = true)
     List<Object[]> findLoansCountersByLastDay(int days);
+
+
 
 }

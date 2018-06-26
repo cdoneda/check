@@ -52,7 +52,9 @@ public class LoanController {
             loanService.save(activeUser.getUser(), search.getCriteria(), StatusLoan.OUTPUT);
             mav.addObject("message", messages.get("field.saved"));
         }
-        mav.addObject("item", newItem);
+        //mav.addObject("item", new Item());
+        mav.addObject("search", new Search());
+        mav.addObject("itemAdd", newItem);
         mav.addObject("loans", loanService.getLoans(activeUser.getUser()));
         return mav;
     }

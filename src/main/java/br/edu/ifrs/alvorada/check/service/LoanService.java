@@ -4,6 +4,9 @@ import br.edu.ifrs.alvorada.check.config.Messages;
 import br.edu.ifrs.alvorada.check.domain.*;
 import br.edu.ifrs.alvorada.check.repository.LoanRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -35,22 +38,38 @@ public class LoanService {
 
     public Long save(User user, Long id, StatusLoan statusLoan) {
         Loan loan = new Loan();
-        loan.setUser(user);
+
         loan.setItem(itemService.getOneById(id));
-        loan.setDateTimeLoan(LocalDateTime.now());
+        switch (statusLoan) {
+            case OUTPUT:
+                loan.setUser(user);
+                loan.setDateTimeLoan(LocalDateTime.now());
+                break;
+            case INPUT:
+                loan.setUserReturn(user);
+                loan.setDateTimeReturn(LocalDateTime.now());
+                break;
+        }
         loan.setStatusLoan(statusLoan);
         return loanRepository.save(loan).getId();
     }
 
-    public Loan getOne(Loan loan) {
-        if (loan == null || loan.getId() == null)
+    public Long saveReturn(User user, Long loanId, StatusLoan statusLoan) {
+
+        if (loanId == null)
             return null;
-        Optional<Loan> optionalLoan = loanRepository.findById(loan.getId());
-        return optionalLoan.isPresent() ? optionalLoan.get() : null;
+
+        Loan loan = loanRepository.getOne(loanId);
+        loan.setUserReturn(user);
+        loan.setDateTimeReturn(LocalDateTime.now());
+        loan.setStatusLoan(statusLoan);
+        System.out.println("VAI  UPD" + loan.toString());
+        return loanRepository.save(loan).getId();
     }
 
+
     public Item checkLoaned(Item item, BindingResult bindingResult, User user) {
-        if(item == null)
+        if (item == null)
             return null;
         Optional<Loan> optionalLoan = loanRepository.getLoanByItem(item.getId());
         if (optionalLoan.isPresent()) {
@@ -64,6 +83,35 @@ public class LoanService {
         return item;
     }
 
+    public Loan checkReturn(Item item, BindingResult bindingResult, User user, boolean isAdmin) {
+        if (item == null)
+            return null;
+        Optional<Loan> optionalLoan = loanRepository.getLoanByItem(item.getId());
+        if (optionalLoan.isPresent()) {
+            if (optionalLoan.get().getUser().getId().equals(user.getId())) {
+                System.out.println(" CheckR: "+ optionalLoan.get().toString());
+                return optionalLoan.get();
+            }
+            if (isAdmin)
+                return optionalLoan.get();
+            else {
+                bindingResult.addError(new FieldError("search", "criteria", messages.get("field.search")));
+                return null;
+            }
+
+        } else {
+
+            bindingResult.addError(new FieldError("search", "criteria", messages.get("field.question")));
+
+            return null;
+        }
+
+    }
+
+    public boolean isAdmin(UserDetails userDetails) {
+        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+        return authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    }
 
     //Counters
     public List<?> findTotalLoanedCountersByUser(User user) {
