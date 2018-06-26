@@ -34,6 +34,8 @@ public class ReturnController {
         ModelAndView mav = new ModelAndView("/return/return");
         mav.addObject("search", new Search());
         mav.addObject("loans", loanService.getLoans(activeUser.getUser()));
+        mav.addObject("loansFull", loanService.getAllLoans());
+        mav.addObject("isAdmin", loanService.isAdmin(activeUser));
         return mav;
     }
 
@@ -53,6 +55,8 @@ public class ReturnController {
             mav.addObject("search", new Search());
         }
         mav.addObject("loans", loanService.getLoans(activeUser.getUser()));
+        mav.addObject("loansFull", loanService.getAllLoans());
+        mav.addObject("isAdmin", loanService.isAdmin(activeUser));
         return mav;
     }
 }

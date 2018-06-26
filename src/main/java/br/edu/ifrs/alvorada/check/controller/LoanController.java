@@ -50,7 +50,6 @@ public class LoanController {
         newItem = loanService.checkLoaned(newItem, bindingResult, activeUser.getUser());
         if (!bindingResult.hasErrors()) {
             loanService.save(activeUser.getUser(), search.getCriteria(), StatusLoan.OUTPUT);
-            //mav.addObject("message", messages.get("field.saved"));
             mav.addObject("search", new Search());
             mav.addObject("itemAdd", newItem);
         }

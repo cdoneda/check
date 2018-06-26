@@ -36,7 +36,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title" th:text="#{menu.return}"></h3>
             </div>
-            <div class="box-body" th:hidden="${#lists.isEmpty(loans)}">
+            <div class="box-body" th:hidden="${#lists.isEmpty(loans)} and not ${isAdmin}">
                 <!--div th:insert="/loan/fragment/form"></div-->
                 <form id="form-search" th:object="${search}" name="form-search"
                       th:action="@{/return/}" method="post" enctype="multipart/form-data">
@@ -70,6 +70,13 @@
                 <p class="margin" th:text="#{field.you.dont.have.any.items.loaned}">
                     Você não possui nenhum item emprestado.
                 </p>
+            </div>
+
+            <div class="box-footer" sec:authorize="hasRole('ROLE_ADMIN')">
+                <div id="itemsTableHolderFull">
+                    <div th:fragment="userItemsFragment"
+                         th:replace="/loan/fragment/itemsTableFull :: main"></div>
+                </div>
             </div>
         </div>
         <!-- /.box -->

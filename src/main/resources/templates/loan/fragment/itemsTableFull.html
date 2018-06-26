@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="main" id="items-section">
+	<div class="box-header with-border">
+		<h3 class="box-title" th:text="#{menu.loan}">Empréstimos</h3>
+	</div>
+	<table id="table-list" class="table table-bordered table-striped">
+		<thead>
+		<tr>
+			<th th:text="#{patrimony}">Patrimônio</th>
+			<th th:text="#{name}">Nome do item</th>
+			<th th:text="#{name.loan}">Retirado por</th>
+			<th th:text="#{date.hour.removal}">Data/Hora Retirada</th>
+			<th th:text="#{date.hour.return}">Data de Devolução</th>
+			<th th:text="#{name.return}">Devolvido por</th>
+		</tr>
+		</thead>
+		<tbody th:remove="all-but-first">
+		<tr  th:each="ln : ${loansFull}">
+			<td th:text="${ln.item.id}">id</td>
+			<td th:text="${ln.user.name}">nome</td>
+			<td th:text="${ln.item.name}">nome</td>
+			<td th:text="${#temporals.format(ln.dateTimeLoan, 'dd/MM/yyyy HH:mm')}">date</td>
+			<td th:text="${ln.dateTimeReturn} ? ${#temporals.format(ln.dateTimeReturn, 'dd/MM/yyyy HH:mm')}">date</td>
+			<td th:text="${ln?.userReturn?.name}">nome</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+</html>

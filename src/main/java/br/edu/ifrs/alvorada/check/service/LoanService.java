@@ -36,6 +36,11 @@ public class LoanService {
         return list;
     }
 
+    public Iterable<Loan> getAllLoans() {
+        final List<Loan> list = loanRepository.findAll();
+        return list;
+    }
+
     public Long save(User user, Long id, StatusLoan statusLoan) {
         Loan loan = new Loan();
 
