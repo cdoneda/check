@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.text.MessageFormat;
 
 @Controller
 @AllArgsConstructor
@@ -46,7 +47,10 @@ public class ReturnController {
 
         if (!bindingResult.hasErrors()) {
             loanService.saveReturn(activeUser.getUser(), loan.getId(), StatusLoan.INPUT);
-            mav.addObject("message", messages.get("field.saved"));
+
+            mav.addObject("message", messages.get("field.returned"));
+            mav.addObject("messageId", ": #" + loan.getItem().getId());
+            mav.addObject("search", new Search());
         }
         mav.addObject("loans", loanService.getLoans(activeUser.getUser()));
         return mav;

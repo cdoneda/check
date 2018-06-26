@@ -38,7 +38,7 @@
 
 			<section class="content-header" th:if="${message}">
 				<div class="callout callout-success lead">
-	                <p id="success-message" th:text="${message}"></p>
+	                <p id="success-message"><span th:text="${message}"/><span th:if="messageId" th:text="${messageId}"/></p>
 				</div>
 			</section>
 
