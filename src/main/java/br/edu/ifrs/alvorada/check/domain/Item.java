@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Data
@@ -12,14 +13,15 @@ public class Item {
 
     @Id
     @GeneratedValue
+    @Positive
     private Long id;
 
     @NotNull
-    @Size(min = 2, max = 50)
+    @Size(min = 2, max = 100)
     private String name;
 
     @NotNull
-    @Size(min = 2, max = 100)
+    @Size(min = 2, max = 500)
     private String description;
 
     @Enumerated(EnumType.ORDINAL)

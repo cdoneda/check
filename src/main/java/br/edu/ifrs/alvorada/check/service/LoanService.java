@@ -45,16 +45,8 @@ public class LoanService {
         Loan loan = new Loan();
 
         loan.setItem(itemService.getOneById(id));
-        switch (statusLoan) {
-            case OUTPUT:
-                loan.setUser(user);
-                loan.setDateTimeLoan(LocalDateTime.now());
-                break;
-            case INPUT:
-                loan.setUserReturn(user);
-                loan.setDateTimeReturn(LocalDateTime.now());
-                break;
-        }
+        loan.setUser(user);
+        loan.setDateTimeLoan(LocalDateTime.now());
         loan.setStatusLoan(statusLoan);
         return loanRepository.save(loan).getId();
     }
@@ -68,7 +60,6 @@ public class LoanService {
         loan.setUserReturn(user);
         loan.setDateTimeReturn(LocalDateTime.now());
         loan.setStatusLoan(statusLoan);
-        System.out.println("VAI  UPD" + loan.toString());
         return loanRepository.save(loan).getId();
     }
 
@@ -94,19 +85,18 @@ public class LoanService {
         Optional<Loan> optionalLoan = loanRepository.getLoanByItem(item.getId());
         if (optionalLoan.isPresent()) {
             if (optionalLoan.get().getUser().getId().equals(user.getId())) {
-                System.out.println(" CheckR: "+ optionalLoan.get().toString());
                 return optionalLoan.get();
             }
             if (isAdmin)
                 return optionalLoan.get();
             else {
-                bindingResult.addError(new FieldError("search", "criteria", messages.get("field.search")));
+                bindingResult.addError(new FieldError("search", "criteria", messages.get("field.no.permission.return")));
                 return null;
             }
 
         } else {
 
-            bindingResult.addError(new FieldError("search", "criteria", messages.get("field.question")));
+            bindingResult.addError(new FieldError("search", "criteria", messages.get("field.item.not.loaned")));
 
             return null;
         }
