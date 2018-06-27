@@ -13,7 +13,10 @@ import java.util.Optional;
 public interface LoanRepository extends JpaRepository<Loan, Long> {
 
     @Query(value = "SELECT * FROM LOAN WHERE DATE_TIME_RETURN IS NULL AND STATUS_LOAN = 1 AND USER_ID = (?1);", nativeQuery = true)
-    List<Loan> getLoans(Long userId);
+    List<Loan> getLoansByUser(Long userId);
+
+    @Query(value = "SELECT * FROM LOAN WHERE DATE_TIME_RETURN IS NULL AND STATUS_LOAN = 1;", nativeQuery = true)
+    List<Loan> getAllLoans();
 
     @Query(value = "SELECT * FROM LOAN WHERE DATE_TIME_RETURN IS NULL AND STATUS_LOAN = 1 AND ITEM_ID = (?1) LIMIT 1;", nativeQuery = true)
     Optional<Loan> getLoanByItem(Long itemId);

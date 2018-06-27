@@ -32,6 +32,7 @@ public class HomeController {
         mav.addObject("totalLoansToday", loanService.findLoansByDays(0));
         mav.addObject("totalLoansLastSevenDays", loanService.findLoansByDays(-7));
         mav.addObject("totalLoansLastThirtyDays", loanService.findLoansByDays(-30));
+        mav.addObject("loansFull", loanService.getAllLoansAndReturns());
         return mav;
     }
 }

@@ -10,15 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-
-import static java.util.Comparator.comparingLong;
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toCollection;
 
 @Service
 @AllArgsConstructor
@@ -32,13 +26,18 @@ public class LoanService {
 
     public Iterable<Loan> getLoans(User user) {
         final List<Loan> list = user != null ?
-                loanRepository.getLoans(user.getId()) : new ArrayList();
+                loanRepository.getLoansByUser(user.getId()) : new ArrayList();
         return list;
     }
 
     public Iterable<Loan> getAllLoans() {
+        final List<Loan> list = loanRepository.getAllLoans();
+        return list == null || list.isEmpty()?  new ArrayList() : list ;
+    }
+
+    public Iterable<Loan> getAllLoansAndReturns() {
         final List<Loan> list = loanRepository.findAll();
-        return list;
+        return list == null || list.isEmpty()?  new ArrayList() : list ;
     }
 
     public Long save(User user, Long id, StatusLoan statusLoan) {

@@ -145,9 +145,12 @@
             </div>
         </div>
         <!-- /.box-body -->
-        <!--div class="box-footer">
-            Footer
-        </div-->
+        <div class="box-footer" sec:authorize="hasRole('ROLE_ADMIN')">
+            <div id="itemsTableHolderFull">
+                <div th:fragment="userItemsFragment"
+                     th:replace="/loan/fragment/itemsTableFull :: main"></div>
+            </div>
+        </div>
         <!-- /.box-footer-->
 
         <!-- /.box -->
