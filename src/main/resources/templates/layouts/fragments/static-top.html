@@ -22,13 +22,13 @@
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
                                 <li>
-                                    <a  href="#" th:href="@{?lang=pt_BR}">
-                                        <i class="flag-icon flag-icon-br"></i>  <span
+                                    <a href="#" th:href="@{?lang=pt_BR}">
+                                        <i class="flag-icon flag-icon-br"></i> <span
                                             th:text="#{language.pt_BR}"> Portuguese</span></a>
                                 </li>
                                 <li>
                                     <a href="#" th:href="@{?lang=en_US}">
-                                        <i class="flag-icon flag-icon-us"></i>  <span
+                                        <i class="flag-icon flag-icon-us"></i> <span
                                             th:text="#{language.en_US}"> English</span></a>
                                 </li>
 
@@ -45,15 +45,15 @@
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
-                        <li class="user-header"><img
-                                src="/photos/no_image_available.png" class="img-circle"
-                                alt="User Image">
+                        <li class="user-header">
+                            <!--img src="/photos/no_image_available.png" class="img-circle"
+                                 alt="User Image"-->
 
                             <p>
 								<span class="hidden-xs"
                                       th:text="${#authentication.principal.user.name}"/>
-                                <small>Some
-                                    description here...
+                                <small>
+                                    <span th:text="${#authentication.principal.user.email}"></span>
                                 </small>
                             </p>
                         </li>
@@ -61,11 +61,11 @@
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat"
-                                   th:href="@{/user/profile}">Profile</a>
+                                   th:href="@{/user/profile}" th:text="#{user.profile}">Profile</a>
                             </div>
                             <div class="pull-right">
                                 <a href="#" th:href="@{/login?logout}"
-                                   class="btn btn-default btn-flat">Sign out</a>
+                                   class="btn btn-default btn-flat" th:text="#{user.signOut}">Sign out</a>
                             </div>
                         </li>
                     </ul>
