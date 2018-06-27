@@ -14,6 +14,7 @@ public class HomeController {
 
 
     private LoanService loanService;
+
     @GetMapping("/")
     public ModelAndView home() {
         ModelAndView mav = new ModelAndView("redirect:/home/");
