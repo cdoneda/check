@@ -24,7 +24,7 @@ public class UserServiceTest {
     public void testSaveExistingUserIgnoringPassword(){
         // given
         User user = new User();
-        user.setId(1L);
+        user.setId(1002L);
         user.setPassword(PASSWORD);
 
         // when

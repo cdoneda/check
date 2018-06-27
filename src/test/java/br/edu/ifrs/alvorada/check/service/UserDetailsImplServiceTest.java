@@ -1,11 +1,14 @@
 package br.edu.ifrs.alvorada.check.service;
 
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,33 +17,54 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserDetailsImplServiceTest {
 
-	@Autowired
-	UserDetailsImplService service;
+    @Autowired
+    UserDetailsImplService service;
 
-	private final String USERNAME="user";
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
 
-	@Test
-	public void shouldReturnUserDetails(){
-		//given
-		//having existing user
+    private final String USERNAME = "cassiano.doneda";
 
-		//when
-		UserDetails userDetails = service.loadUserByUsername(USERNAME);
+    @Test
+    public void shouldReturnUserDetails() {
+        // given
+        // having existing user
 
-		//then
-		assertThat(userDetails).extracting("user.name").contains("Master Yoda");
-		assertThat(userDetails.getAuthorities()).hasSize(2);
-	}
+        // when
+        UserDetails userDetails = service.loadUserByUsername(USERNAME);
 
-	@Test
-	public void shouldReturnNull(){
-		//given
-		//having existing user
+        // then
+        assertThat(userDetails).extracting("user.name").contains("Cassiano Doneda");
+        assertThat(userDetails.getAuthorities()).hasSize(1);
+    }
 
-		//when
-		UserDetails userDetails = service.loadUserByUsername(null);
+    @Test
+    public void shouldThrowsExceptionWhenUsernameIsNull() {
+        // given
+        boolean thrown = false;
+        String username = null;
+        // when
+        try {
+            service.loadUserByUsername(username);
+        } catch (UsernameNotFoundException e) {
+            thrown = true;
+        }
+        // then
+        assertThat(thrown).isTrue();
+    }
 
-		//then
-		assertThat(userDetails).isNull();
-	}
+    @Test
+    public void shouldThrowsExceptionWhenNotFoundUsername() {
+        // given
+        boolean thrown = false;
+        String username = "User that not exist";
+        // when
+        try {
+            service.loadUserByUsername(username);
+        } catch (UsernameNotFoundException e) {
+            thrown = true;
+        }
+        // then
+        assertThat(thrown).isTrue();
+    }
 }

@@ -20,7 +20,7 @@ public class UserDetailsImplService implements UserDetailsService {
 	private final UserRepository userRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails 	loadUserByUsername(String username) throws UsernameNotFoundException {
 		if (!StringUtils.isEmpty(username))
 			return this.userRepository.findByUsername(username)
 					.map(user -> new UserImpl(user.getUsername(), user.getPassword(),

@@ -3,6 +3,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml" layouts>
 
+<th:block layout:fragment="head-title">
+    <title th:text="#{login.title}"/>
+</th:block>
+
 <head th:include="/layouts/fragments/scripts :: head"/>
 
 <style>
@@ -28,14 +32,14 @@
 
             <div class="form-group has-feedback">
                 <input type="text" id="username" name="username"
-                       class="form-control" th:placeholder="#{login.user}"
+                       class="form-control" th:placeholder="#{login.username.placeholder}"
                        required="true" value="cassiano.doneda"/> <span
                     class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
 
             <div class="form-group has-feedback">
                 <input type="password" id="password" name="password"
-                       class="form-control" th:placeholder="#{login.password}"
+                       class="form-control" th:placeholder="#{login.password.placeholder}"
                        required="true" value="user"/> <span
                     class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>

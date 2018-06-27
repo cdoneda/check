@@ -16,7 +16,7 @@ public class LoginPage extends FluentPage {
     private FluentWebElement submitButton;
 
     public void isAt() {
-        assertThat(window().title()).isEqualTo("Login - LicitaWeb");
+        assertThat(window().title()).isEqualTo("Login");
     }
 
     public LoginPage fillAndSubmitForm(String... paramsOrdered) {
