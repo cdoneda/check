@@ -30,7 +30,6 @@ public class LoanController {
 
     private final LoanService loanService;
     private final ItemService itemService;
-    private final Messages messages;
 
     // TODO
     @GetMapping(value = {"", "/"})

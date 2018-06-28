@@ -32,11 +32,14 @@ public class ItemService {
 
         Optional<Item> optionalItem = itemRepository.findById(id);
 
+        // TODO RNG001 Cassiano
         // É um item cadastrado
         if (!optionalItem.isPresent()) {
             bindingResult.addError(new FieldError("search", "criteria", messages.get("field.not.founded")));
             return null;
         }
+
+        // TODO RNG005 Cassiano
         // Item está ativo
         if (!isActive(optionalItem.get())) {
             bindingResult.addError(new FieldError("search", "criteria", messages.get("field.not.active")));

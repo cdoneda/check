@@ -63,6 +63,7 @@ public class LoanService {
     }
 
 
+    // TODO RNG003, RNG004 Cassiano
     public Item checkLoaned(Item item, BindingResult bindingResult, User user) {
         if (item == null)
             return null;
@@ -78,6 +79,7 @@ public class LoanService {
         return item;
     }
 
+    // TODO RNG002 Cassiano
     public Loan checkReturn(Item item, BindingResult bindingResult, User user, boolean isAdmin) {
         if (item == null)
             return null;
