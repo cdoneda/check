@@ -26,7 +26,7 @@ insert into item (id, description, name, status, type) values
 (104, 'Notebook ACER', 'Notebook DAP 1', 0, 3),
 (105, 'Notebook ACER', 'Notebook DAP 2', 0, 3),
 (106, 'Notebook ACER', 'Notebook DAP 3', 0, 3),
-(107, 'Notebook ACER', 'Notebook DAP 4', 0, 3);
+(107, 'Notebook ACER', 'Notebook DAP 4', 1, 3);
 
 insert into loan (id, date_time_loan, date_time_return, item_id, user_id, status_loan, user_return_id) values
 (494, '2018-01-01 12:30:00', '2018-01-02 10:34:00', 105, 1002, 0, 1002),

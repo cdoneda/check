@@ -19,8 +19,8 @@
         <ul class="sidebar-menu">
             <li class="header" th:text="#{menu.menuItems}">MENU ITEMS</li>
             <li><a th:href="@{/home}"><i class="fa fa-dashboard"></i> <span th:text="#{menu.home}">Home</span></a></li>
-            <li><a th:href="@{/loan/}"><i class="fa fa-edit"></i> <span th:text="#{menu.loan}">Loan</span></a></li>
-            <li><a th:href="@{/return/}"><i class="fa fa-level-down"></i> <span th:text="#{menu.return}">Return</span></a></li>
+            <li><a th:href="@{/loan/}" id="btn-loan"><i class="fa fa-edit"></i> <span th:text="#{menu.loan}">Loan</span></a></li>
+            <li><a th:href="@{/return/}" id="btn-return"><i class="fa fa-level-down"></i> <span th:text="#{menu.return}">Return</span></a></li>
             <li sec:authorize="hasRole('ROLE_ADMIN')" class="header" th:text="#{menu.administration}">ADMINISTRATION</li>
             <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/item/}"><i class="fa fa-file-o"></i> <span th:text="#{menu.item}">Item</span></a></li>
 

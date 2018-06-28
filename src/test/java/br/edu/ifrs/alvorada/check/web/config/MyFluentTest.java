@@ -36,4 +36,10 @@ public abstract class MyFluentTest extends FluentTest {
 		loginPage.fillAndSubmitForm("cassiano.doneda", "user").awaitUntilFormDisappear();
 		assertThat(window().title()).isEqualTo("Home");
 	}
+
+	public void loginAdmin() {
+		loginPage.go(port);
+		loginPage.fillAndSubmitForm("dti", "user").awaitUntilFormDisappear();
+		assertThat(window().title()).isEqualTo("Home");
+	}
 }
