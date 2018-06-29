@@ -6,18 +6,16 @@ import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.io.File;
-import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @PageUrl("http://localhost:{port}/loan/")
 @Data
-public class LoanPage extends FluentPage {
+public class ReturnPage extends FluentPage {
 
-    @FindBy(css = "#btn-loan")
-    private FluentWebElement btnLoan;
+    @FindBy(css = "#btn-return")
+    private FluentWebElement btnReturn;
 
     @FindBy(css = "#form-search")
     private FluentWebElement formSearch;
@@ -37,11 +35,14 @@ public class LoanPage extends FluentPage {
     @FindBy(css = "#error-status")
     private FluentWebElement errorMessage;
 
-    public LoanPage buttonLoan() {
-        btnLoan.click();
+    @FindBy(css = "#success-message")
+    private FluentWebElement infoMessage;
+
+    public ReturnPage buttonReturn() {
+        btnReturn.click();
         return this;
     }
-    public LoanPage awaitUntilFormAppear() {
+    public ReturnPage awaitUntilFormAppear() {
         await().atMost(10, TimeUnit.SECONDS).until(formSearch).present();
         return this;
     }
@@ -50,18 +51,21 @@ public class LoanPage extends FluentPage {
         assertThat(window().title()).isEqualTo("Home");
     }
 
+    public void isAtReturn() {
+        assertThat(window().title()).isEqualTo("Devolução");
+    }
 
-    public LoanPage inputItem(String searchPhrase) {
+    public ReturnPage inputItem(String searchPhrase) {
         criteriaSearch.write(searchPhrase);
         return this;
     }
 
-    public LoanPage submitLoan() {
+    public ReturnPage submitLoan() {
         submitSearch.submit();
         return this;
     }
 
-    public LoanPage awaitUntilResult102Appear() {
+    public ReturnPage awaitUntilResult102Appear() {
         await().atMost(5, TimeUnit.SECONDS).until(result102).present();
         return this;
     }

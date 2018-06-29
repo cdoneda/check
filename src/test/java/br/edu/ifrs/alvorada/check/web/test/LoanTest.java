@@ -2,10 +2,9 @@ package br.edu.ifrs.alvorada.check.web.test;
 
 import br.edu.ifrs.alvorada.check.web.config.MyFluentTest;
 import br.edu.ifrs.alvorada.check.web.page.LoanPage;
-import lombok.Data;
+
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -29,7 +28,7 @@ public class LoanTest extends MyFluentTest {
 
 
 
-    // TODO CdT001 (RNG001, RNG003, RNG005) - Cassiano
+    // TODO CdT001 (RNG001, RNG003, RNG005) - Cenário 1
     @Test
     public void loanItemSuccess() {
         loginUser();
@@ -53,7 +52,7 @@ public class LoanTest extends MyFluentTest {
 
     }
 
-    // TODO CdT001 (RNG004) - Cassiano
+    // TODO CdT001 (RNG004) - Cenário 2
     @Test
     public void loanTwiceSameItem() {
         loginUser();
@@ -73,10 +72,12 @@ public class LoanTest extends MyFluentTest {
         List<FluentWebElement> trs = loanPage.getTableList().find(By.xpath("//tbody//tr"));
         Assertions.assertThat(trs.size()).isEqualTo(1);
         assertThat($(".help-block")).hasSize(1);
+        String text = loanPage.getErrorMessage().getElement().getText();
+        assertThat(text).isEqualTo("Você já retirou este item.");
     }
 
 
-    // TODO CdT001 (RNG005) - Cassiano
+    // TODO CdT001 (RNG005) - Cenário 3
     @Test
     public void loanNoPermissionItem() {
         loginUser();
@@ -96,219 +97,58 @@ public class LoanTest extends MyFluentTest {
         List<FluentWebElement> trs = loanPage.getTableList().find(By.xpath("//tbody//tr"));
         Assertions.assertThat(trs.size()).isEqualTo(1);
         assertThat($(".help-block")).hasSize(1);
+        String text = loanPage.getErrorMessage().getElement().getText();
+        assertThat(text).isEqualTo("O Item não está disponível para empréstimo");
     }
 
 
-    // TODO CdT001 (RNG002) - Cassiano
-   /* @Test
-    public void aSearchNotFoundResults() {
-
-        loginUser("user");
-        //Given
-        //dogPage.go(port);
-        dogPage.isAtHome();
-        // and exit 3 entry dogs
-        //When
-        dogPage.openSearch();
-        dogPage.awaitUntilPageLoaded(); // for pageLoader
-
-        dogPage.typeSearchPhraseIn("wrong search");
-        dogPage.submitSearch();
-        dogPage.awaitUntilPageLoaded(); // for pageLoader
-
-        //Then
-        assertThat(window().title()).isEqualTo("Home");
-        assertThat(dogPage.getMessageResults().text()).containsIgnoringCase("A search did not return results.");
-
-    }
-
-    // TODO CdT001 (RNG007) - Cassiano
+    // TODO CdT001 (RNG005) - Cenário 4
     @Test
-    public void deleteEntryDog() {
-
-        loginUser("user");
+    public void loanItemAlreadyLoaned() {
+        loginUser();
         //Given
-        //dogPage.go(port);
-        dogPage.isAtHome();
-        // and exit 3 entry dogs
-        //When
-        dogPage.openResult().awaitUntilEditButtonAppear().awaitUntilFormDogAppear();
-        dogPage.awaitUntilPageLoaded(); // for pageLoader
-        dogPage.isAtDetailDog();
-        dogPage.awaitUntilPageLoaded(); // for pageLoader
-        dogPage.editDetail().awaitUntilButtonSaveAppear().awaitUntilFormDogAppear();
-        dogPage.awaitUntilPageLoaded(); // for pageLoader
-
-
-        dogPage.openAdvancedOptions();
-        dogPage.deleteDog();
-
-        //Then
-        assertThat(window().title()).isEqualTo("Home");
-        assertThat(dogPage.getInfoMessage().text()).containsIgnoringCase("Dog entry was deleted");
-        //alterado para 3 denvido ao teste que adiciona mais um cao na base de dados
-        assertThat($(".thumbnail")).hasSize(3);
-
-    }
-
-    // TODO CdT001 (RNG007) - Cassiano
-    @Test
-    public void deleteEntryDogIsNotOwner() {
-        //before
-        loginUser("fulano");
-        //Given
-        dogPage.isAtHome();
-        // and exit 3 entry dogs
+        loanPage.isAtHome();
+        // usuário já possui um item emprestado
 
         //When
-        dogPage.openFirst().awaitUntilEditButtonAppear().awaitUntilFormDogAppear();
-        dogPage.awaitUntilPageLoaded(); // for pageLoader
-        dogPage.isAtDetailDog();
-        dogPage.awaitUntilPageLoaded(); // for pageLoader
-        dogPage.editDetail().awaitUntilButtonSaveAppear().awaitUntilFormDogAppear();
-        dogPage.awaitUntilPageLoaded(); // for pageLoader
-
+        loanPage.buttonLoan();
+        loanPage.awaitUntilFormAppear();
+        loanPage.inputItem("101");
+        loanPage.submitLoan();
 
         //Then
-        assertThat((dogPage.getAdvancedOptions()).present()).isFalse();
-        assertThat(window().title()).isEqualTo("Record");
-
-
-    }
-
-    // TODO CdT001 (RNG007) - Cassiano
-    @Test
-    public void entryNewDog() {
-
-        loginUser("user");
-        dogPage.maxWindows();
-
-        //Given
-        //dogPage.go(port);
-        dogPage.isAtHome();
-        // and exit 3 entry dogs
-        //When
-        dogPage.buttonAddDog().awaitUntilFormDogAppear();
-        dogPage.typeName("Spike");
-        dogPage.selectGenderMale();
-        dogPage.selectConfirmSubmit();
-        //Then
-        assertThat(window().title()).isEqualTo("Detail");
-        //assertThat(dogPage.getInfoMessage().text()).containsIgnoringCase("Dog entry was deleted");
-        //assertThat($(".thumbnail")).hasSize(2);
-
+        loanPage.awaitUntilFormAppear();
+        assertThat(window().title()).isEqualTo("Empréstimo");
+        List<FluentWebElement> trs = loanPage.getTableList().find(By.xpath("//tbody//tr"));
+        Assertions.assertThat(trs.size()).isEqualTo(1);
+        assertThat($(".help-block")).hasSize(1);
+        String text = loanPage.getErrorMessage().getElement().getText();
+        assertThat(text).isEqualTo("O item já está emprestado.");
     }
 
 
-
-*/
-    /*
-
-    // TODO CdT001 (RNG001) - Cassiano
+    // TODO CdT001 (RNG001) - Cenário 5
     @Test
-    public void lastProfessorEvaluateTermPaper() {
-
+    public void loanItemNotExist() {
+        loginUser();
         //Given
-        dogPage.go(port);
-        dogPage.isAt();
-        dogPage.selectTermPaperForEvaluationLastProfessor()
-                .awaitUntilFormEvaluationTermPaperAppear();
-        dogPage.isAtTermPaperEvaluation();
-        // e o professor for o último professor associado a avaliar este trabalho
-        // e o outro avaliador informou os dados da avaliação escrita com 9, 6, 7, 7, 5 e 8
-        // e a apresentação oral com os valores 7, 8 , 9 , 10, 8  e 7
+        loanPage.isAtHome();
+        // usuário já possui um item emprestado
 
         //When
-        dogPage.fillTextAreaForm("Aprovado, revise o documento anexado");
-        dogPage.fillAndSubmitForm("","9", "6", "7", "7", "5", "8","7", "8" , "9" , "10", "8", "7", dogPage.getFileAbsolutePath())
-                .awaitUntilConfirmationModal();
-        dogPage.selectConfirmSubmit()
-                .awaitUntilTableListEvaluateAppear();
+        loanPage.buttonLoan();
+        loanPage.awaitUntilFormAppear();
+        loanPage.inputItem("33");
+        loanPage.submitLoan();
 
         //Then
-        assertThat(window().title()).isEqualTo("Avaliação de Trabalhos");
-       // assertThat(dogPage.getGradeFinalLastProfessor().text()).containsIgnoringCase("7,6");
-       // assertThat(dogPage.getGradeStatusLastProfessor().text()).containsIgnoringCase("APROVADO");
-
+        loanPage.awaitUntilFormAppear();
+        assertThat(window().title()).isEqualTo("Empréstimo");
+        List<FluentWebElement> trs = loanPage.getTableList().find(By.xpath("//tbody//tr"));
+        Assertions.assertThat(trs.size()).isEqualTo(1);
+        assertThat($(".help-block")).hasSize(1);
+        String text = loanPage.getErrorMessage().getElement().getText();
+        assertThat(text).isEqualTo("A pesquisa não retornou resultados.");
     }
-    // TODO CdT004 (RNG006, RNG008, RNG009, RNG012, RNG013) - Cassiano
-    @Test
-    public void notLastProfessorEvaluateTermPaper() {
-
-        //Given
-        dogPage.go(port);
-        dogPage.isAt();
-        dogPage.selectTermPaperForEvaluationNotLastProfessor()
-                .awaitUntilFormEvaluationTermPaperAppear();
-        dogPage.isAtTermPaperEvaluation();
-
-        //When
-        dogPage.fillTextAreaForm("Aprovado, revise o documento anexado");
-        dogPage.fillAndSubmitForm("","9", "6", "7", "7", "5", "8","7", "8" , "9" , "10", "8", "7", dogPage.getFileAbsolutePath())
-                .awaitUntilConfirmationModal();
-        dogPage.selectConfirmSubmit()
-                .awaitUntilTableListEvaluateAppear();
-
-        //Then
-        assertThat(window().title()).isEqualTo("Avaliação de Trabalhos");
-       // assertThat(dogPage.getGradeFinalNotLastProfessor().text()).containsIgnoringCase("");
-       // assertThat(dogPage.getGradeStatusNotLastProfessor().text()).containsIgnoringCase("EM PROGRESSO");
-
-    }
-
-
-
-    // TODO CdT004 (RNG006, RNG008, RNG009, RNG010, RNG013, RNG014, RNG053, RNG054) - Cassiano
-    @Test
-    public void studentNotPresentation() {
-
-        //Given
-        dogPage.go(port);
-        dogPage.isAt();
-        dogPage.selectTermPaperForEvaluationLastProfessorTwo()
-                .awaitUntilFormEvaluationTermPaperAppear();
-        dogPage.isAtTermPaperEvaluation();
-        dogPage.awaitTwoSeconds();
-        // e o professor for o último professor associado a avaliar este trabalho
-        // e o outro avaliador informou os dados da avaliação escrita com 9, 6, 7, 7, 5 e 8
-        // e a apresentação oral com os valores 7, 8 , 9 , 10, 8  e 7
-
-        //When
-        dogPage.fillTextAreaForm("Não apresentou o trabalho");
-        dogPage.fillAndSubmitForm("","0", "0", "0", "0", "0", "0","0", "0" , "0" , "0", "0", "0", dogPage.getFileAbsolutePath())
-                .awaitUntilConfirmationModal();
-        dogPage.selectConfirmSubmit()
-                .awaitUntilTableListEvaluateAppear();
-
-        //Then
-        assertThat(window().title()).isEqualTo("Avaliação de Trabalhos");
-        //assertThat(dogPage.getGradeFinalLastProfessorTwo().text()).containsIgnoringCase("0,0");
-        //assertThat(dogPage.getGradeStatusLastProfessorTwo().text()).containsIgnoringCase("REPROVADO");
-    }
-
-    // TODO CdT004 (RNG009, RNG012, RNG013, RNG014, RNG054) - Cassiano
-    @Test
-    public void proposalEvaluationRedo() {
-
-        //Given
-        dogPage.go(port);
-        dogPage.isAt();
-        dogPage.selectProposalForEvaluationLastProfessor()
-                .awaitUntilFormEvaluationAdviceAppear();
-        dogPage.isAtProposalEvaluation();
-        // e o professor for o último professor associado a avaliar este trabalho
-        // e o outro avaliador aprovou a proposta
-
-        //When
-        dogPage.fillTextAreaForm("Não apresentou o trabalho");
-        dogPage.selectRadioEvaluateRedoAndSubmit()
-                .awaitUntilConfirmationModal();
-        dogPage.selectConfirmSubmit()
-                .awaitUntilTableListEvaluateAppear();
-
-        //Then
-        assertThat(window().title()).isEqualTo("Avaliação de Trabalhos");
-        //assertThat(dogPage.getProposalStatusLastProfessor().text()).containsIgnoringCase("REFAZER");
-    }*/
 
 }

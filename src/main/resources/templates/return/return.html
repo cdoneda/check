@@ -51,7 +51,7 @@
                                 <i class="fa fa-2x fa-level-down"> <span th:text="#{button.return}"></span></i> </button>
                             </span>
                         </div>
-                        <span th:if="${#fields.hasErrors('criteria')}"
+                        <span id="error-status"  th:if="${#fields.hasErrors('criteria')}"
                               th:errors="*{criteria}"
                               th:class="help-block"/>
                     </div>

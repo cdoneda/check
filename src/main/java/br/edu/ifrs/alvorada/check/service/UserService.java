@@ -28,12 +28,12 @@ public class UserService {
 		Optional<User> optionalUser = userRepository.findById(user.getId());
 		return optionalUser.isPresent() ? optionalUser.get() : null;
 	}
-
-	public User getOneByUsername(String username) {
-		if (username == null)
-			return null;
-		Optional<User> optionalUser = userRepository.findByUsername(username);
-		return optionalUser.isPresent() ? optionalUser.get() : null;
-	}
+//
+//	public User getOneByUsername(String username) {
+//		if (username == null)
+//			return null;
+//		Optional<User> optionalUser = userRepository.findByUsername(username);
+//		return optionalUser.isPresent() ? optionalUser.get() : null;
+//	}
 
 }
