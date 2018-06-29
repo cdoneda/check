@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 public abstract class BaseControllerTest {
 
-	protected static final Long USER_ID = 1L;
+	protected static final Long USER_ID = 1002L;
 	protected static final String USER_NAME = "Cassiano Doneda";
 	protected static final String FIELD_SAVED = "Salvo com sucesso";
 

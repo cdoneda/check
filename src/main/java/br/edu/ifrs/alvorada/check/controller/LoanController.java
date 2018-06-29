@@ -1,9 +1,7 @@
 package br.edu.ifrs.alvorada.check.controller;
 
-import br.edu.ifrs.alvorada.check.config.Messages;
 import br.edu.ifrs.alvorada.check.config.auth.UserImpl;
 import br.edu.ifrs.alvorada.check.domain.Item;
-import br.edu.ifrs.alvorada.check.domain.Loan;
 import br.edu.ifrs.alvorada.check.domain.Search;
 import br.edu.ifrs.alvorada.check.domain.StatusLoan;
 import br.edu.ifrs.alvorada.check.service.ItemService;
@@ -13,7 +11,6 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
